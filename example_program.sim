@@ -1,4 +1,4 @@
-! Simulation example, taken from https://en.wikipedia.org/wiki/Simula ;
+! Simulation example, taken from https://en.wikipedia.org/wiki/Simula#Simulation ;
 
 Simulation Begin
    Class FittingRoom; Begin
