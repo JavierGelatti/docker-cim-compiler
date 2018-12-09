@@ -21,6 +21,6 @@ cat example_program.sim | docker run -i simula run_simula
 ## More information
 Image in Docker Hub: https://hub.docker.com/r/javiergelatti/simula/
 
-About the Cim compiler: http://folk.uio.no/simula67/cim.shtml
+About the Cim compiler: http://folk.uio.no/simula67/cim.shtml, https://www.gnu.org/software//gawk/cim.wait/cim.html
 
-About Simula: https://wikipedia.org/wiki/Simula
+About Simula: https://wikipedia.org/wiki/Simula, http://tedfelix.com/software/simula.html
