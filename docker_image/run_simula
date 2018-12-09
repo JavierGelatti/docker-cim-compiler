@@ -1,0 +1,35 @@
+#!/bin/bash
+
+function main {
+    # Exit on error
+    set -e
+
+    # Generate random program name
+    UUID=$(cat /proc/sys/kernel/random/uuid)
+    PROGRAM_NAME=program-$UUID
+
+    # Save stdin to file
+    cat - > $PROGRAM_NAME.sim
+
+    # Compile capturing errors
+    set +e
+    cim $PROGRAM_NAME &> $PROGRAM_NAME.log
+
+    if [ $? -ne 0 ]; then
+        # Failed, show compiler output and exit
+        cat $PROGRAM_NAME.log
+        exit
+    fi
+
+    # Run
+    ./$PROGRAM_NAME
+}
+
+function clean_up {
+    rm -f $PROGRAM_NAME*
+}
+
+# Clean up on exit
+trap clean_up EXIT
+
+main

@@ -1,0 +1,3 @@
+#!/bin/bash
+
+cat $1 | docker run -i javiergelatti/simula run_simula
