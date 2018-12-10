@@ -13,9 +13,9 @@ For example, to execute the `example_program.sim` file, run:
 ## Building the image from source
 If you want to build the image yourself, run `docker build -t simula docker_image/`.
 
-Then, to execute a simula file, for example stored in `/home/program.sim`, run:
+Then, to execute a simula file, for example stored in `/home/my_file.sim`, run:
 ```
-docker run -v /home/program.sim:/simula/program.sim --rm -it javiergelatti/simula run_simula
+docker run -v /home/my_file.sim:/simula/program.sim --rm -it javiergelatti/simula run_simula
 ```
 
 ## More information
