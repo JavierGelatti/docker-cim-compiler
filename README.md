@@ -4,7 +4,7 @@ To be able to use it, you need to have Docker installed.
 
 ## Usage
 To execute a simula program you can use the `run_simula` script, that uses the image [available in Docker Hub](https://hub.docker.com/r/javiergelatti/simula/).
-For example, to execute the `example_program.sim` file run:
+For example, to execute the `example_program.sim` file, run:
 
 ```
 ./run_simula example_program.sim
