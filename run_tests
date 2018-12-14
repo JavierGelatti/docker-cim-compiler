@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# Show result on exit
+function show_result {
+    echo ""
+    if [[ $? -eq 0 ]]; then
+        echo "PASS"
+    else
+        echo "FAIL"
+    fi
+}
+trap show_result EXIT
+
+# Exit on error
+set -e
+
+echo ""
+echo "Building Docker image"
+IMAGE_NAME="simula_test"
+docker build -t $IMAGE_NAME docker_image/
+
+echo ""
+echo "Running tests"
+for test_name in simulation_example classes_example interactive_program_example; do
+    echo "- $test_name"
+
+    # Use input file if it exists
+    input_file=tests/${test_name}_input.txt
+    if ! [ -r $input_file ]; then
+        input_file=/dev/null
+    fi
+
+    # Run the example
+    ./run_simula tests/${test_name}.sim $IMAGE_NAME   > tests/${test_name}_actual_output.txt < ${input_file}
+
+    # Verify the output
+    diff tests/${test_name}_expected_output.txt tests/${test_name}_actual_output.txt
+done
+
+echo ""
+echo "Cleaning up"
+rm -f tests/*actual_output.txt

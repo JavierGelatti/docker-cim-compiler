@@ -3,6 +3,7 @@
 PROGRAM_FILE_NAME=$1
 CURRENT_DIR=$(pwd)
 PROGRAM_PATH=$CURRENT_DIR/$PROGRAM_FILE_NAME
+IMAGE_NAME=${2:-"javiergelatti/simula"}
 
 if tty -s; then
     RUNNING_IN_TERMINAL=true
@@ -15,4 +16,4 @@ docker run \
     --tty=$RUNNING_IN_TERMINAL \
     --interactive \
     --rm \
-    javiergelatti/simula run_simula
+    $IMAGE_NAME run_simula
