@@ -4,4 +4,15 @@ PROGRAM_FILE_NAME=$1
 CURRENT_DIR=$(pwd)
 PROGRAM_PATH=$CURRENT_DIR/$PROGRAM_FILE_NAME
 
-docker run -v $PROGRAM_PATH:/simula/program.sim --rm -it javiergelatti/simula run_simula
+if tty -s; then
+    RUNNING_IN_TERMINAL=true
+else
+    RUNNING_IN_TERMINAL=false
+fi
+
+docker run \
+    --volume $PROGRAM_PATH:/simula/program.sim \
+    --tty=$RUNNING_IN_TERMINAL \
+    --interactive \
+    --rm \
+    javiergelatti/simula run_simula
