@@ -1,4 +1,6 @@
 # docker-cim-compiler
+[![Build Status](https://travis-ci.org/JavierGelatti/docker-cim-compiler.svg?branch=master)](https://travis-ci.org/JavierGelatti/docker-cim-compiler)
+
 Docker image that contains the Cim compiler for the Simula programming language.
 To be able to use it, you need to have Docker installed.
 
