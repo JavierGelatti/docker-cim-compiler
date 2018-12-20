@@ -3,5 +3,9 @@ language: minimal
 services:
     - docker
 
+env:
+    - IMAGE_NAME="simula_test"
+
 script:
-    - ./run_tests
+    - ./build_image
+    - ./run_tests simulation_example classes_example interactive_program_example

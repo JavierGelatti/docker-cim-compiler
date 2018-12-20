@@ -1,0 +1,8 @@
+#!/bin/bash
+
+IMAGE_NAME=${IMAGE_NAME:-simula}
+
+echo ""
+echo "Building Docker ${IMAGE_NAME} image"
+
+docker build -t $IMAGE_NAME docker_image/

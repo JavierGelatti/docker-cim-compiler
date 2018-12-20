@@ -1,5 +1,7 @@
 #!/bin/bash
 
+IMAGE_NAME=${IMAGE_NAME:-simula}
+
 # Show result on exit
 function show_result {
     echo ""
@@ -15,13 +17,8 @@ trap show_result EXIT
 set -e
 
 echo ""
-echo "Building Docker image"
-IMAGE_NAME="simula_test"
-docker build -t $IMAGE_NAME docker_image/
-
-echo ""
-echo "Running tests"
-for test_name in simulation_example classes_example interactive_program_example; do
+echo "Running tests on ${IMAGE_NAME} image"
+for test_name in $@; do
     echo "- $test_name"
 
     # Use input file if it exists
@@ -31,7 +28,7 @@ for test_name in simulation_example classes_example interactive_program_example;
     fi
 
     # Run the example
-    ./run_simula tests/${test_name}.sim $IMAGE_NAME   > tests/${test_name}_actual_output.txt < ${input_file}
+    ./run_simula tests/${test_name}.sim $IMAGE_NAME > tests/${test_name}_actual_output.txt < ${input_file}
 
     # Verify the output
     diff tests/${test_name}_expected_output.txt tests/${test_name}_actual_output.txt
