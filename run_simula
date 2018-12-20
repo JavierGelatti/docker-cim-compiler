@@ -5,6 +5,11 @@ CURRENT_DIR=$(pwd)
 PROGRAM_PATH=$CURRENT_DIR/$PROGRAM_FILE_NAME
 IMAGE_NAME=${2:-"javiergelatti/simula"}
 
+if [ ! -f $PROGRAM_PATH ]; then
+    echo "The file '${PROGRAM_FILE_NAME}' does not exist!"
+    exit 1
+fi
+
 if tty -s; then
     RUNNING_IN_TERMINAL=true
 else
