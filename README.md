@@ -12,6 +12,12 @@ For example, to execute the `example_program.sim` file, run:
 ./run_simula example_program.sim
 ```
 
+You can also use the `eval_simula.sh` script to pass a program via standard input:
+
+```
+echo 'Begin OutInt(1 + 1, 4); OutImage; End;' | ./eval_simula.sh
+```
+
 ## Building the image from source
 If you want to build the image yourself, run `docker build -t simula docker_image/`.
 
