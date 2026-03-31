@@ -1,11 +1,12 @@
 #!/bin/bash
 
-IMAGE_NAME=${IMAGE_NAME:-simula}
+IMAGE_NAME="${IMAGE_NAME:-simula}"
 
 # Show result on exit
 function show_result {
+    local exit_code=$?
     echo ""
-    if [[ $? -eq 0 ]]; then
+    if [[ $exit_code -eq 0 ]]; then
         echo "PASS"
     else
         echo "FAIL"
@@ -14,24 +15,24 @@ function show_result {
 trap show_result EXIT
 
 # Exit on error
-set -e
+set -euo pipefail
 
 echo ""
 echo "Running tests on ${IMAGE_NAME} image"
-for test_name in $@; do
+for test_name in "$@"; do
     echo "- $test_name"
 
     # Use input file if it exists
-    input_file=tests/${test_name}_input.txt
-    if ! [ -r $input_file ]; then
+    input_file="tests/${test_name}_input.txt"
+    if ! [ -r "$input_file" ]; then
         input_file=/dev/null
     fi
 
     # Run the example
-    ./run_simula tests/${test_name}.sim $IMAGE_NAME > tests/${test_name}_actual_output.txt < ${input_file}
+    ./run_simula "tests/${test_name}.sim" "$IMAGE_NAME" > "tests/${test_name}_actual_output.txt" < "$input_file"
 
     # Verify the output
-    diff tests/${test_name}_expected_output.txt tests/${test_name}_actual_output.txt
+    diff "tests/${test_name}_expected_output.txt" "tests/${test_name}_actual_output.txt"
 done
 
 echo ""

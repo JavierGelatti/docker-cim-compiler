@@ -1,15 +1,14 @@
 #!/bin/bash
+set -euo pipefail
 
 PROGRAM_NAME="program"
 
 # Compile capturing errors
-cim $PROGRAM_NAME &> $PROGRAM_NAME.log
-
-if [ $? -ne 0 ]; then
+if ! cim "$PROGRAM_NAME" &> "${PROGRAM_NAME}.log"; then
     # Failed, show compiler output and exit
-    cat $PROGRAM_NAME.log
-    exit
+    cat "${PROGRAM_NAME}.log"
+    exit 1
 fi
 
 # Run compiled program
-./$PROGRAM_NAME
+./"$PROGRAM_NAME"

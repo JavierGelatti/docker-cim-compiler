@@ -1,8 +1,9 @@
 #!/bin/bash
+set -euo pipefail
 
-IMAGE_NAME=${IMAGE_NAME:-simula}
+IMAGE_NAME="${IMAGE_NAME:-simula}"
 
 echo ""
 echo "Building Docker ${IMAGE_NAME} image"
 
-docker build -t $IMAGE_NAME docker_image/
+docker build -t "$IMAGE_NAME" docker_image/

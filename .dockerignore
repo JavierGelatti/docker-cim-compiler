@@ -1,0 +1,9 @@
+.git
+.github
+.travis.yml
+.dockerignore
+tests/
+run_simula
+run_tests
+build_image
+README.md

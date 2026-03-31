@@ -1,11 +1,17 @@
 #!/bin/bash
+set -euo pipefail
 
-PROGRAM_FILE_NAME=$1
-CURRENT_DIR=$(pwd)
-PROGRAM_PATH=$CURRENT_DIR/$PROGRAM_FILE_NAME
-IMAGE_NAME=${2:-"javiergelatti/simula"}
+if [[ $# -lt 1 ]]; then
+    echo "Usage: run_simula <program.sim> [image_name]"
+    exit 1
+fi
 
-if [ ! -f $PROGRAM_PATH ]; then
+PROGRAM_FILE_NAME="$1"
+CURRENT_DIR="$(pwd)"
+PROGRAM_PATH="$CURRENT_DIR/$PROGRAM_FILE_NAME"
+IMAGE_NAME="${2:-"javiergelatti/simula"}"
+
+if [ ! -f "$PROGRAM_PATH" ]; then
     echo "The file '${PROGRAM_FILE_NAME}' does not exist!"
     exit 1
 fi
@@ -17,8 +23,8 @@ else
 fi
 
 docker run \
-    --volume $PROGRAM_PATH:/simula/program.sim \
-    --tty=$RUNNING_IN_TERMINAL \
+    --volume "$PROGRAM_PATH":/simula/program.sim \
+    --tty="$RUNNING_IN_TERMINAL" \
     --interactive \
     --rm \
-    $IMAGE_NAME run_simula
+    "$IMAGE_NAME" run_simula

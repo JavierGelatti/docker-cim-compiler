@@ -1,0 +1,21 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      IMAGE_NAME: simula_test
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: ./build_image
+
+      - name: Run tests
+        run: ./run_tests simulation_example classes_example interactive_program_example
